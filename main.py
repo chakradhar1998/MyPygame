@@ -22,6 +22,7 @@ PlayerImg = pygame.image.load('monkey.png')
 PlayerX = 370
 PlayerY = 480
 Player_change = 0
+Player_rect= PlayerImg.get_rect(topleft= (PlayerX,PlayerY))
 
 #Hunter
 HunterImg = pygame.image.load('man.png')
@@ -34,20 +35,16 @@ Hunter_rect= HunterImg.get_rect(midtop=(HunterX,HunterY))
 
 #banana
 bananaImg=pygame.image.load('banana.png')
-bananaX = PlayerX
+bananaX = PlayerX +32
 bananaY = PlayerY
 bananaY_change = 0
-banana_rect= bananaImg.get_rect(midtop=(bananaX,bananaY))
+banana_rect= bananaImg.get_rect(center=(bananaX,bananaY))
 
 
-#learn rect using bull
-bull_img = pygame.image.load('bulls.png')
-bullx=370
-bully=480
-bull_rect = bull_img.get_rect(midbottom = (bullx,bully))
+
 
 def Player(x,y):
-    screen.blit(PlayerImg,(x,y))
+    screen.blit(PlayerImg,Player_rect)
 
 
 def Hunter(x,y):
@@ -74,14 +71,14 @@ while running:
     # If keystroke is pressed check whether its right or left
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                Player_change = -1
+                Player_change = -2
                 print("left")
 
 
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                Player_change = 1
+                Player_change = 2
                 print("right")
 
         if event.type == pygame.KEYUP:
@@ -91,19 +88,18 @@ while running:
 
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("yay")
             bananaY_change = -3
             
 
 
 
     #check boundaries for player
-    PlayerX += Player_change
+    Player_rect.left += Player_change
 
-    if PlayerX <=0:
-        PlayerX = 0
-    elif PlayerX >=736:
-        PlayerX = 736
+    if Player_rect.left <=0:
+        Player_rect.left = 0
+    elif Player_rect.left >=736:
+        Player_rect.left = 736
 
 
     Hunter_rect.left += HunterX_change
@@ -125,13 +121,18 @@ while running:
         banana_rect.top = PlayerY
 
     if bananaY_change == 0:
-        banana_rect.left = PlayerX
+        banana_rect.left = Player_rect.left
 
     banana(bananaX,bananaY)
     Player(PlayerX,PlayerY)
     Hunter(HunterX,HunterY)
 
-    screen.blit(bull_img,bull_rect)
-   # bull_rect.top += -4
+
+    if banana_rect.colliderect(Hunter_rect):
+        banana_rect.top= PlayerY
+        print(banana_rect.top)
+        bananaY_change = 0
+        Hunter_rect.top = random.randint(50,150)
+
     pygame.display.update()
     clock.tick(600)
