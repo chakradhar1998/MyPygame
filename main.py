@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #initialize the pygame
 pygame.init()
@@ -19,8 +20,8 @@ Player_change = 0
 
 #Hunter
 HunterImg = pygame.image.load('man.png')
-HunterX = 370
-HunterY = 200
+HunterX = random.randint(0,370)
+HunterY = random.randint(50,150)
 
 
 def Player(x,y):
