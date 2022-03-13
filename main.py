@@ -1,8 +1,10 @@
 import pygame
 import random
+from sys import exit
 
 #initialize the pygame
 pygame.init()
+clock = pygame.time.Clock()
 
 #create a screen
 screen = pygame.display.set_mode((800, 600))
@@ -77,11 +79,13 @@ while running:
     if HunterX <=0:
         HunterX = 0
         HunterX_change = abs(HunterX_change)
+        HunterY += 64 
     elif HunterX >=736:
         HunterX = 736
         HunterX_change = HunterX_change* -1
-
+        HunterY +=64
 
     Player(PlayerX,PlayerY)
     Hunter(HunterX,HunterY)
     pygame.display.update()
+    clock.tick(600)
