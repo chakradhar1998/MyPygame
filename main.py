@@ -84,7 +84,7 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("yay")
-            bananaY_change = -1
+            bananaY_change = -3
 
 
 
