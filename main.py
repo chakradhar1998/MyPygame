@@ -20,8 +20,10 @@ Player_change = 0
 
 #Hunter
 HunterImg = pygame.image.load('man.png')
-HunterX = random.randint(0,370)
+HunterX = random.randint(0,736)
 HunterY = random.randint(50,150)
+HunterX_change = 1
+HunterY_change = 0
 
 
 def Player(x,y):
@@ -61,12 +63,23 @@ while running:
                 Player_change = 0
                 print("released")
 
+    #check boundaries for player
     PlayerX += Player_change
 
     if PlayerX <=0:
         PlayerX = 0
     elif PlayerX >=736:
         PlayerX = 736
+
+
+    HunterX += HunterX_change
+
+    if HunterX <=0:
+        HunterX = 0
+        HunterX_change = abs(HunterX_change)
+    elif HunterX >=736:
+        HunterX = 736
+        HunterX_change = HunterX_change* -1
 
 
     Player(PlayerX,PlayerY)
