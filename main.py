@@ -45,6 +45,9 @@ def Player(x,y):
 def Hunter(x,y):
     screen.blit(HunterImg,(x,y))
 
+def banana(x,y):
+    screen.blit(bananaImg,(x,y))
+
 #game loop
 running = True
 while running:
@@ -67,6 +70,7 @@ while running:
                 print("left")
 
 
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 Player_change = 1
@@ -76,6 +80,13 @@ while running:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 Player_change = 0
                 print("released")
+
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print("yay")
+            bananaY_change = -1
+
+
 
     #check boundaries for player
     PlayerX += Player_change
@@ -97,6 +108,18 @@ while running:
         HunterX_change = HunterX_change* -1
         HunterY +=64
 
+
+
+    if bananaY == 0:
+        bananaY_change = 0
+        bananaY = PlayerY
+    if bananaY_change == 0:
+        bananaX=PlayerX
+    
+
+    bananaY += bananaY_change
+
+    banana(bananaX,bananaY)
     Player(PlayerX,PlayerY)
     Hunter(HunterX,HunterY)
     pygame.display.update()
