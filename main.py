@@ -29,6 +29,7 @@ HunterX = random.randint(0,736)
 HunterY = random.randint(50,150)
 HunterX_change = 1
 HunterY_change = 0
+Hunter_rect= HunterImg.get_rect(midtop=(HunterX,HunterY))
 
 
 #banana
@@ -50,7 +51,7 @@ def Player(x,y):
 
 
 def Hunter(x,y):
-    screen.blit(HunterImg,(x,y))
+    screen.blit(HunterImg,Hunter_rect)
 
 def banana(x,y):
     screen.blit(bananaImg,banana_rect)
@@ -105,16 +106,16 @@ while running:
         PlayerX = 736
 
 
-    HunterX += HunterX_change
+    Hunter_rect.left += HunterX_change
 
-    if HunterX <=0:
-        HunterX = 0
+    if Hunter_rect.left <=0:
+        Hunter_rect.left = 0
         HunterX_change = abs(HunterX_change)
-        HunterY += 64 
-    elif HunterX >=736:
-        HunterX = 736
+        Hunter_rect.top += 64 
+    elif Hunter_rect.left >=736:
+        Hunter_rect.left = 736
         HunterX_change = HunterX_change* -1
-        HunterY +=64
+        Hunter_rect.top +=64
 
 
 
