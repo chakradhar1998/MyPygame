@@ -9,6 +9,9 @@ clock = pygame.time.Clock()
 #create a screen
 screen = pygame.display.set_mode((800, 600))
 
+#background
+bg= pygame.image.load('test.png')
+
 #title and icon
 pygame.display.set_caption('Bunny chesina game')
 icon = pygame.image.load('project.png')
@@ -28,6 +31,13 @@ HunterX_change = 1
 HunterY_change = 0
 
 
+#banana
+bananaImg=pygame.image.load('banana.png')
+bananaX = PlayerX
+bananaY = PlayerY
+bananaY_change = 0
+
+
 def Player(x,y):
     screen.blit(PlayerImg,(x,y))
 
@@ -40,6 +50,8 @@ running = True
 while running:
 
     screen.fill((0,0,0))
+    # bg image
+    screen.blit(bg,(0,0))
 
 
 
