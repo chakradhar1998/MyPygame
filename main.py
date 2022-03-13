@@ -36,7 +36,14 @@ bananaImg=pygame.image.load('banana.png')
 bananaX = PlayerX
 bananaY = PlayerY
 bananaY_change = 0
+banana_rect= bananaImg.get_rect(midtop=(bananaX,bananaY))
 
+
+#learn rect using bull
+bull_img = pygame.image.load('bulls.png')
+bullx=370
+bully=480
+bull_rect = bull_img.get_rect(midbottom = (bullx,bully))
 
 def Player(x,y):
     screen.blit(PlayerImg,(x,y))
@@ -46,7 +53,7 @@ def Hunter(x,y):
     screen.blit(HunterImg,(x,y))
 
 def banana(x,y):
-    screen.blit(bananaImg,(x,y))
+    screen.blit(bananaImg,banana_rect)
 
 #game loop
 running = True
@@ -85,6 +92,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("yay")
             bananaY_change = -3
+            
 
 
 
@@ -110,17 +118,19 @@ while running:
 
 
 
-    if bananaY == 0:
+    banana_rect.top += bananaY_change
+    if banana_rect.top == 0:
         bananaY_change = 0
-        bananaY = PlayerY
-    if bananaY_change == 0:
-        bananaX=PlayerX
-    
+        banana_rect.top = PlayerY
 
-    bananaY += bananaY_change
+    if bananaY_change == 0:
+        banana_rect.left = PlayerX
 
     banana(bananaX,bananaY)
     Player(PlayerX,PlayerY)
     Hunter(HunterX,HunterY)
+
+    screen.blit(bull_img,bull_rect)
+   # bull_rect.top += -4
     pygame.display.update()
     clock.tick(600)
