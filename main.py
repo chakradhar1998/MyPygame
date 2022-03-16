@@ -116,12 +116,12 @@ while running:
 
 
     banana_rect.top += bananaY_change
-    if banana_rect.top == 0:
+    if banana_rect.top <= 0:
         bananaY_change = 0
-        banana_rect.top = PlayerY
+        banana_rect.center = Player_rect.center
 
     if bananaY_change == 0:
-        banana_rect.left = Player_rect.left
+        banana_rect.center = Player_rect.center
 
     banana(bananaX,bananaY)
     Player(PlayerX,PlayerY)
